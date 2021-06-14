@@ -1,6 +1,6 @@
 <template>
     <div class="container page">
-        <Breadcrumbs />
+<!--        <Breadcrumbs />-->
 
         <h1 class="page__title">ООО "Абсолют"</h1>
         <div class="page__block">
@@ -27,7 +27,6 @@
 
 <script>
   export default {
-    layout: 'app',
     name: "index"
   }
 </script>
