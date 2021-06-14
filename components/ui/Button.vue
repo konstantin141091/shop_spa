@@ -37,28 +37,28 @@
   }
 </script>
 
-<!--<style lang="scss" scoped>-->
-<!--    @import "../../sass/variables";-->
+<style lang="scss" scoped>
+    @import "assets/styles/_variables";
 
-<!--    .button {-->
-<!--        min-width: 150px;-->
-<!--        display: inline-flex;-->
-<!--        align-items: center;-->
-<!--        justify-content: center;-->
-<!--        max-width: 100%;-->
-<!--        font-size: 2rem;-->
-<!--        line-height: 1;-->
-<!--        color: #ffffff;-->
-<!--        border-radius: 5px;-->
-<!--        white-space: nowrap;-->
-<!--        background: $colorBtn;-->
-<!--        outline: none;-->
-<!--        transition: all .3s;-->
+    .button {
+        min-width: 150px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 100%;
+        font-size: 2rem;
+        line-height: 1;
+        color: #ffffff;
+        border-radius: 5px;
+        white-space: nowrap;
+        background: $colorBtn;
+        outline: none;
+        transition: all .3s;
 
-<!--        &:hover {-->
-<!--            background: lighten($colorBtn, .9);-->
-<!--        }-->
-<!--    }-->
+        &:hover {
+            background: lighten($colorBtn, .9);
+        }
+    }
 
-<!--</style>-->
+</style>
 
