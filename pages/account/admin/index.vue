@@ -7,7 +7,6 @@
 
 <script>
   export default {
-    layout: 'app',
     name: "index",
     // computed: {
     //   ...mapGetters({

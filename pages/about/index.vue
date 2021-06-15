@@ -27,7 +27,6 @@
 
 <script>
   export default {
-    layout: 'app',
     name: "index"
   }
 </script>

@@ -29,7 +29,6 @@
 <script>
   import Button from "/components/ui/Button";
   export default {
-    layout: 'app',
     name: "index",
     components: {
       Button,

@@ -94,7 +94,6 @@
   // import SuccessMessageComponent from '../../components/SuccessMessageComponent'
   // import Button from "../../ui/Button";
   export default {
-    layout: 'app',
     name: "index",
     // components: {
     //   Button,
