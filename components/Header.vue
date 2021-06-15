@@ -1,160 +1,160 @@
 <template>
-    <div class="header__content">
-        <header class="header">
-            <div class="header__top">
-                <div class="header__flex container">
-                    <nav class="header__navbar">
-                        <ul class="header__menu">
-                            <li class="menu__item">
-                                <nuxt-link to="/" class="menu__link">Главная</nuxt-link>
-                            </li>
-                            <li class="menu__item">
-                                <nuxt-link to="/catalog" class="menu__link">Каталог</nuxt-link>
-                            </li>
-                            <li class="menu__item">
-                                <nuxt-link to="/about" class="menu__link">О компании</nuxt-link>
-                            </li>
-                            <li class="menu__item">
-                                <nuxt-link to="/contacts" class="menu__link">Контакты</nuxt-link>
-                            </li>
-                            <li class="menu__item">
-                                <nuxt-link to="/delivery" class="menu__link">Доставка и оплата</nuxt-link>
-                            </li>
+  <div class="header__content">
+    <header class="header">
+      <div class="header__top">
+        <div class="header__flex container">
+          <nav class="header__navbar">
+            <ul class="header__menu">
+              <li class="menu__item">
+                <nuxt-link to="/" class="menu__link">Главная</nuxt-link>
+              </li>
+              <li class="menu__item">
+                <nuxt-link to="/catalog" class="menu__link">Каталог</nuxt-link>
+              </li>
+              <li class="menu__item">
+                <nuxt-link to="/about" class="menu__link">О компании</nuxt-link>
+              </li>
+              <li class="menu__item">
+                <nuxt-link to="/contacts" class="menu__link">Контакты</nuxt-link>
+              </li>
+              <li class="menu__item">
+                <nuxt-link to="/delivery" class="menu__link">Доставка и оплата</nuxt-link>
+              </li>
 
-<!--                            <template v-if="!authenticated">
-                                <li class="menu__item">
-                                    <nuxt-link to="/login" class="menu__link">Войти</nuxt-link>
-                                </li>
-                            </template>
-                            <template v-else>
-                                <li class="menu__item">
-                                    <nuxt-link to="/account/history" class="menu__link">Личный кабинет</nuxt-link>
-                                </li>
-                                <li class="menu__item">
-                                    <a href="#" @click.prevent="signOut">Выйти</a>
-                                </li>
+              <!--                            <template v-if="!authenticated">
+                                              <li class="menu__item">
+                                                  <nuxt-link to="/login" class="menu__link">Войти</nuxt-link>
+                                              </li>
+                                          </template>
+                                          <template v-else>
+                                              <li class="menu__item">
+                                                  <nuxt-link to="/account/history" class="menu__link">Личный кабинет</nuxt-link>
+                                              </li>
+                                              <li class="menu__item">
+                                                  <a href="#" @click.prevent="signOut">Выйти</a>
+                                              </li>
 
-                            </template>-->
-                        </ul>
-                    </nav>
-                    <p class="header__work-time">Доставка с 9:00 до 22:00</p>
-                    <div class="header__phone">
-                        <a class="header__phone-value" href="tel:+78008008080">+7(3519)46-66-11</a>
-                    </div>
-                </div>
-            </div>
-            <div class="header__bottom container">
-                <div class="header__logo">
-                    <nuxt-link to="/" class="navbar-brand">
-                        <img src="~/assets/images/logo.png" alt="Logo">
-                    </nuxt-link>
-                </div>
+                                          </template>-->
+            </ul>
+          </nav>
+          <p class="header__work-time">Доставка с 9:00 до 22:00</p>
+          <div class="header__phone">
+            <a class="header__phone-value" href="tel:+78008008080">+7(3519)46-66-11</a>
+          </div>
+        </div>
+      </div>
+      <div class="header__bottom container">
+        <div class="header__logo">
+          <nuxt-link to="/" class="navbar-brand">
+            <img src="~/assets/images/logo.png" alt="Logo">
+          </nuxt-link>
+        </div>
 
-                <div class="header__search">
-                    <div class="header__search-form">
-                        <input
-                                type="text"
-                                class="header__search-input"
-                                placeholder="Поиск"
+        <div class="header__search">
+          <div class="header__search-form">
+            <input
+              type="text"
+              class="header__search-input"
+              placeholder="Поиск"
 
-                        >
-                        <button
-                                class="header__search-btn"
+            >
+            <button
+              class="header__search-btn"
 
-                        >
-                            <img src="~/assets/icons/search_white.svg" alt="найти">
-                        </button>
-                    </div>
-                </div>
+            >
+              <img src="~/assets/icons/search_white.svg" alt="найти">
+            </button>
+          </div>
+        </div>
 
-                <div class="header__controls">
-                    <nuxt-link to="/account/history">
-                        <img src="~/assets/icons/person_black.svg" alt="аккаунт">
-                    </nuxt-link>
-                    <nuxt-link to="/cart">
+        <div class="header__controls">
+          <nuxt-link to="/account/history">
+            <img src="~/assets/icons/person_black.svg" alt="аккаунт">
+          </nuxt-link>
+          <nuxt-link to="/cart">
                     <span class="header__cart">
                         <img src="~/assets/icons/shopping_cart_black.svg" alt="корзина">
                         <span class="header__cart-badge">{{ 10 }}</span>
                     </span>
-                        <span class="header__cart-text">{{ 5555 }}&nbsp;руб</span>
-                    </nuxt-link>
-                </div>
-            </div>
-        </header>
+            <span class="header__cart-text">{{ 5555 }}&nbsp;руб</span>
+          </nuxt-link>
+        </div>
+      </div>
+    </header>
 
-<!--        <header class="header__mobile container">
-            <button class="header__button-menu">
-                <span class="material-icons">menu</span>
-            </button>
-            <div class="header__logo">
-                <nuxt-link to="/" class="navbar-brand">
-                    <img src="/images/logo.png" alt="Logo">
-                </nuxt-link>
-            </div>
-            <div class="header__controls">
-&lt;!&ndash;                <nuxt-link to="/cart">&ndash;&gt;
-&lt;!&ndash;                    <span class="header__cart">&ndash;&gt;
-&lt;!&ndash;                        <img src="/icons/shopping_cart_black.svg" alt="корзина">&ndash;&gt;
-&lt;!&ndash;                        <span class="header__cart-badge">{{ CART.length }}</span>&ndash;&gt;
-&lt;!&ndash;                    </span>&ndash;&gt;
-&lt;!&ndash;                </nuxt-link>&ndash;&gt;
-            </div>
-        </header>-->
-    </div>
+    <header class="header__mobile container">
+      <button class="header__button-menu">
+        <span class="material-icons">menu</span>
+      </button>
+      <div class="header__logo">
+        <nuxt-link to="/" class="navbar-brand">
+          <img src="~/assets/images/logo.png" alt="Logo">
+        </nuxt-link>
+      </div>
+      <div class="header__controls">
+        <nuxt-link to="/cart">
+                    <span class="header__cart">
+                        <img src="~/assets/icons/shopping_cart_black.svg" alt="корзина">
+                        <span class="header__cart-badge">{{ 10 }}</span>
+                    </span>
+        </nuxt-link>
+      </div>
+    </header>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: "Header",
-    data() {
-      return ({
-      })
-    },
+export default {
+  name: "Header",
+  data() {
+    return ({})
+  },
 
-    // computed: {
-    //   ...mapGetters([
-    //     'CART', 'TOTAL_PRICE_CART', 'SEARCH_VALUE'
-    //   ]),
-    //   searchValue: {
-    //     get() {
-    //       return this.SEARCH_VALUE
-    //     },
-    //     set(value) {
-    //       this.GET_SEARCH_VALUE(value)
-    //     }
-    //   },
-    //   ...mapGetters({
-    //     authenticated: 'auth/AUTHENTICATED',
-    //     user: 'auth/USER',
-    //   }),
-    // },
+  // computed: {
+  //   ...mapGetters([
+  //     'CART', 'TOTAL_PRICE_CART', 'SEARCH_VALUE'
+  //   ]),
+  //   searchValue: {
+  //     get() {
+  //       return this.SEARCH_VALUE
+  //     },
+  //     set(value) {
+  //       this.GET_SEARCH_VALUE(value)
+  //     }
+  //   },
+  //   ...mapGetters({
+  //     authenticated: 'auth/AUTHENTICATED',
+  //     user: 'auth/USER',
+  //   }),
+  // },
 
-    // methods: {
-    //   ...mapActions({
-    //     signOutAction: 'auth/SIGN_OUT'
-    //   }),
-    //   ...mapActions([
-    //     'GET_SEARCH_VALUE'
-    //   ]),
-    //
-    //   search(value) {
-    //     this.GET_SEARCH_VALUE(value)
-    //     if (this.$route.path !== '/catalog') {
-    //       this.$router.push('/catalog')
-    //     }
-    //   },
-    //
-    //   async signOut() {
-    //     await this.signOutAction();
-    //     await this.$router.push('/catalog');
-    //     // await
-    //   }
-    // }
-  }
+  // methods: {
+  //   ...mapActions({
+  //     signOutAction: 'auth/SIGN_OUT'
+  //   }),
+  //   ...mapActions([
+  //     'GET_SEARCH_VALUE'
+  //   ]),
+  //
+  //   search(value) {
+  //     this.GET_SEARCH_VALUE(value)
+  //     if (this.$route.path !== '/catalog') {
+  //       this.$router.push('/catalog')
+  //     }
+  //   },
+  //
+  //   async signOut() {
+  //     await this.signOutAction();
+  //     await this.$router.push('/catalog');
+  //     // await
+  //   }
+  // }
+}
 </script>
 
 <style lang="scss" scoped>
 @import "assets/styles/_variables.scss";
+
 .header {
   display: none;
 
@@ -177,6 +177,7 @@
 
   & > button {
     background: transparent;
+
     & > span {
       font-size: 30px;
     }
@@ -195,6 +196,7 @@
   & > .header__cart {
     margin-right: 0;
   }
+
   & > .header__controls {
     display: flex;
     align-items: center;
@@ -344,9 +346,6 @@
     font-weight: bold;
   }
 }
-
-
-
 
 
 </style>
