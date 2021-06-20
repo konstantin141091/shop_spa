@@ -1,12 +1,10 @@
 <template>
   <div class="wrap">
-    <Loader v-if="loading"/>
-    <div class="wrapper-layout" v-else>
+<!--    <Loader v-if="loading"/>-->
+    <div class="wrapper-layout">
       <Header/>
       <main class="main-layout">
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+        <nuxt />
       </main>
       <Footer/>
     </div>
@@ -26,10 +24,12 @@ export default {
     }
   },
 
-  async mounted() {
+  async created() {
     // вызываем запросы к бд, чтобы сохранить данные в store
-    await this.$store.dispatch('products/GET_PRODUCTS');
-    await this.$store.dispatch('GET_CATEGORIES');
+    // console.log(await this.$store.dispatch('products/fetch'))
+    // await this.$store.dispatch('products/fetch')
+    // await this.$store.dispatch('GET_CATEGORIES');
+    await this.$store.dispatch('products/fetch')
     this.loading = false
   }
 }

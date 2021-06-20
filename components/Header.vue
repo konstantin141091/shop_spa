@@ -9,7 +9,7 @@
                 <nuxt-link to="/" class="menu__link">Главная</nuxt-link>
               </li>
               <li class="menu__item">
-                <nuxt-link to="/catalog" class="menu__link">Каталог</nuxt-link>
+                <nuxt-link to="/products" class="menu__link">Каталог</nuxt-link>
               </li>
               <li class="menu__item">
                 <nuxt-link to="/about" class="menu__link">О компании</nuxt-link>
@@ -138,14 +138,14 @@ export default {
   //
   //   search(value) {
   //     this.GET_SEARCH_VALUE(value)
-  //     if (this.$route.path !== '/catalog') {
-  //       this.$router.push('/catalog')
+  //     if (this.$route.path !== '/products') {
+  //       this.$router.push('/products')
   //     }
   //   },
   //
   //   async signOut() {
   //     await this.signOutAction();
-  //     await this.$router.push('/catalog');
+  //     await this.$router.push('/products');
   //     // await
   //   }
   // }
