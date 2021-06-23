@@ -1,37 +1,13 @@
-// export default {
-//   namespaced: true,
-//
-//   state: {
-//     products: [],
-//   },
-//
 //   getters: {
 //     PRODUCTS: state => state.products,
 //     PRODUCTS_NEW: state => state.products.filter(products => products.news),
 //     PRODUCTS_SALE: state => state.products.filter(products => products.sale > 0),
 //     PRODUCT_ONE: state => id => state.products.find(pr => pr.id === id),
 //   },
-//   mutations: {
-//     SET_PRODUCTS: (state, products) => {
-//       state.products = products;
-//     },
-//   },
-//
-//   actions: {
-//     async fetch({commit}) {
-//       try {
-//         let products = await this.$axios.$get('http://shop-sausage/api/product');
-//         commit('SET_PRODUCTS', products);
-//         return products
-//       } catch (e) {
-//         console.log(e)
-//       }
-//     },
-//   }
 // }
 
 export const state = () => ({
-    products: []
+  products: []
 })
 
 export const mutations = {
@@ -43,17 +19,17 @@ export const mutations = {
 export const actions = {
   async fetch({commit}) {
     try {
-      let response = await this.$axios.$get('http://shop-sausage/api/product')
-      commit('setProducts', response.products)
-    }catch (e) {
-      console.log('error', e)
+      const products = (await this.$axios.$get('http://shop-sausage/api/product')).products
+      commit('setProducts', products)
+    } catch (e) {
+      console.log('errorFetch', e)
+      commit('setError', e, {root: true})
+      throw e
     }
   },
 }
 
 export const getters = {
-  products: s => s.products,
-  productOne: s => id => s.products.find(pr => pr.id === id),
+  all: state => state.products,
+  one: state => id => state.products.find(product => product.id === id)
 }
-
-

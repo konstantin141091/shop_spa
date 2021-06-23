@@ -9,20 +9,22 @@
            v-for="product in paginatedData"
            :key="product.id"
       >
-        <nuxt-link
-          to="product_id"
+        <a
+          href="#"
           class="product__img"
+          @click.prevent="openProduct(product.id)"
         >
           <img
             :src="product.img ? require(`~/assets/images/products/${product.img}`) : require('~/assets/images/no_photo.png')"
             :alt="product.name">
-        </nuxt-link>
+        </a>
         <div class="product__text">
-          <nuxt-link
-            :to="product.name"
+          <a
+            href="#"
             class="product__title"
+            @click.prevent="openProduct(product.id)"
           > {{ product.name }}, 1 {{ product.unit }}
-          </nuxt-link>
+          </a>
           <p class="product__price">{{ product.price }} руб.</p>
         </div>
         <div class="product__btn">
@@ -65,7 +67,7 @@ import Notification from "~/components/ui/Notification"
 
 export default {
   name: 'PaginationCatalog',
-  components: { Notification},
+  components: { Notification },
   props: {
     catalogData: {
       type: Array,
@@ -90,6 +92,9 @@ export default {
     }
   },
   methods: {
+    openProduct(productId) {
+      this.$router.push(`/products/${productId}`)
+    },
     addToCart(data) {
       console.log('Add to cart', data)
     },

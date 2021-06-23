@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-<!--    <Breadcrumbs />-->
+    <!--    <Breadcrumbs />-->
 
     <h1 class="page-title">Пользовательское соглашение</h1>
     <div class="content">
@@ -187,9 +187,7 @@
 </template>
 
 <script>
-  export default {
-    name: "index"
-  }
+export default {}
 </script>
 
 <style scoped>

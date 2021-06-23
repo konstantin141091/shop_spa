@@ -1,11 +1,10 @@
 <template>
-  <div class="container">
-    <h1>Product id {{ $route.params.id }}</h1>
-    <pre>{{ $route.params.id }}</pre>
-
-<!--    <div class="flex-box">
+  <div class="container" v-if="hasProduct">
+    <div class="flex-box">
       <div class="left">
-&lt;!&ndash;        <img :src="require(`/images/products/${products.img}`)" :alt="products.name">&ndash;&gt;
+        <img
+          :src="product.img ? require(`~/assets/images/products/${product.img}`) : require('~/assets/images/no_photo.png')"
+          :alt="product.name">
       </div>
 
       <div class="right product">
@@ -33,24 +32,32 @@
           </div>
         </div>
       </div>
-    </div>-->
+    </div>
   </div>
 </template>
 
-<!--<script>
+<script>
 import Button from "~/components/ui/Button"
+import {mapGetters} from 'vuex'
 
 export default {
   components: {Button},
-  async asyncData({ params, $axios }) {
-    const product = await $axios.$get(`https://api.nuxtjs.dev/posts/id`)
-    console.log(product)
-    return { product }
+  computed: {
+    ...mapGetters({productProxy: 'products/one'}),
+    id() {
+      return +this.$route.params.id
+    },
+    product() {
+      return this.productProxy(this.id)
+    },
+    hasProduct() {
+      return typeof this.product !== 'undefined';
+    }
   }
 }
-</script>-->
+</script>
 
-<!--<style lang="scss" scoped>
+<style lang="scss" scoped>
 @import "assets/styles/_variables.scss";
 
 .flex-box {
@@ -109,4 +116,4 @@ export default {
     margin-bottom: 1rem;
   }
 }
-</style>-->
+</style>
