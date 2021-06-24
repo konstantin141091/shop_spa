@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-<!--    <Loader v-if="loading"/>-->
+    <Loader v-if="loading"/>
     <div class="wrapper-layout">
       <Header/>
       <main class="main-layout">
@@ -18,6 +18,18 @@ import Loader from "../components/ui/Loader";
 
 export default {
   components: {Header, Footer, Loader},
+  async fetch({store}) {
+    try {
+      if (store.getters['products/all']) {
+        await store.dispatch('products/fetch')
+      }
+      if (store.getters['categories/all']) {
+        await store.dispatch('categories/fetch')
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  },
   data() {
     return {
       loading: true,
@@ -26,16 +38,14 @@ export default {
 
   async created() {
     // вызываем запросы к бд, чтобы сохранить данные в store
-    // console.log(await this.$store.dispatch('products/fetch'))
-    // await this.$store.dispatch('products/fetch')
-    // await this.$store.dispatch('GET_CATEGORIES');
     await this.$store.dispatch('products/fetch')
+    await this.$store.dispatch('categories/fetch')
     this.loading = false
   }
 }
 </script>
 <style lang="scss">
-#__nuxt, #__layout {
+#__nuxt, #__layout, .wrap {
   height: 100%;
 }
 </style>

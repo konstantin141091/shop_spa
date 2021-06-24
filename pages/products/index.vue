@@ -31,7 +31,7 @@
         <ul class="aside__categories">
           <li
             class="category__list"
-            v-for="category in categoryList"
+            v-for="category in categories"
             @click="sortByCategories(category)"
           >
             {{ category.name }}
@@ -57,7 +57,7 @@ import PaginationCatalog from "~/components/main/catalog/PaginationCatalog"
 
 export default {
   components: {PaginationCatalog, Button, InputCheck, Select},
-  async fetch({store}) {
+/*  async fetch({store}) {
     try {
       if (store.getters['products/all']) {
         await store.dispatch('products/fetch')
@@ -65,11 +65,10 @@ export default {
       if (store.getters['categories/all']) {
         await store.dispatch('categories/fetch')
       }
-
     } catch (e) {
       console.log(e)
     }
-  },
+  },*/
   data() {
     return {
       itemsSort: [
@@ -91,7 +90,7 @@ export default {
       return this.$store.getters['products/all']
     },
 
-    categoryList() {
+    categories() {
       return this.$store.getters['categories/all']
     },
     filterProducts() {
