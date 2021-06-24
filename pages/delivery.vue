@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-<!--    <Breadcrumbs />-->
+    <!--    <Breadcrumbs />-->
 
     <h1 class="page__title">Доставка</h1>
 
@@ -36,9 +36,7 @@
 </template>
 
 <script>
-  export default {
-    name: "index"
-  }
+export default {}
 </script>
 
 <style scoped>

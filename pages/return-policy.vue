@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-<!--    <Breadcrumbs />-->
+    <!--    <Breadcrumbs />-->
 
     <h1 class="page-title">Политика возврата</h1>
     <h3>Возврат денежных средств</h3>
@@ -23,9 +23,9 @@
 </template>
 
 <script>
-  export default {
-    name: "index"
-  }
+export default {
+  name: "index"
+}
 </script>
 
 <style scoped>

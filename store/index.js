@@ -1,18 +1,17 @@
-import Vuex from 'vuex';
-import products from './modules/products'
-import categories from './modules/categories'
-import order from './modules/order'
-import cart from './modules/cart'
-import auth from './modules/auth'
-import all from './modules/all'
+export const state = () => ({
+  error: null
+})
 
-const createStore = () => {
-  return new Vuex.Store({
-    modules: {
-      products, categories, order, cart, auth, all,
-    }
+export const mutations = {
+  setError(state, error) {
+    state.error = error
+  }
+}
 
-  })
-};
+export const actions = {
 
-export default createStore
+}
+
+export const getters = {
+  error: state => state.error
+}

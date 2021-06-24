@@ -1,14 +1,12 @@
 <template>
-    <div class="history">
-        <h1 class="history__title">История заказов</h1>
-        <p>У вас нет не одного заказа</p>
-    </div>
+  <div class="history">
+    <h1 class="history__title">История заказов</h1>
+    <p>У вас нет не одного заказа</p>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: "index"
-  }
+export default {}
 </script>
 
 <!--<style scoped>-->
