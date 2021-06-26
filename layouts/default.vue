@@ -22,7 +22,7 @@ export default {
   components: {Header, Footer, Loader},
   data() {
     return {
-      loading: true,
+      loading: false,
     }
   },
 
