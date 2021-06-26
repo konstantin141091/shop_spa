@@ -2,78 +2,109 @@
   <section class="feedback">
     <h2 class="feedback__title">Обратная связь</h2>
 
-    <form method="post" class="feedback__form" @submit.prevent="submitHandler">
+    <ValidationObserver v-slot="{ invalid }">
+      <form
+        method="post"
+        class="feedback__form"
+        @submit.prevent="submitHandler"
+      >
 
-     <div class="feedback__fields">
-       <!--   <div class="feedback__field feedback__inputs">
-           <div class="feedback__name feedback__input">
-             <input
-               name="name"
-               type="text"
-               placeholder="Имя*"
-               class="form-control"
-               v-model="userName"
-             >
-             <div
-               class="feedback__error"
-             >Поле не должно быть пустым
-             </div>
-             <div
-               class="feedback__error"
-             >Введите корректный email
-             </div>
+        <div class="feedback__fields">
+          <div class="feedback__field feedback__inputs">
+            <label class="feedback__mail feedback__input">
+              <ValidationProvider
+                name="user-name"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="Имя*"
+                  class="form-control"
+                  v-model.trim="userName"
+                >
+                <span>{{ errors[0] }}</span>
+              </ValidationProvider>
+            </label>
+            <label class="feedback__mail feedback__input">
+              <ValidationProvider
+                name="email"
+                rules="email|required"
+                v-slot="{ errors }"
+              >
+                <input
+                  name="email"
+                  type="text"
+                  placeholder="Ваша почта*"
+                  class="form-control"
+                  v-model.trim="email"
+                >
+                <span>{{ errors[0] }}</span>
+              </ValidationProvider>
+            </label>
+          </div>
 
-           </div>
-           <div class="feedback__mail feedback__input">
-             <input
-               name="email"
-               type="text"
-               placeholder="Ваша почта*"
-               class="form-control"
-               v-model.trim="email"
-             >
+          <div class="feedback__field feedback__text">
+            <label class="feedback__mail feedback__input">
+              <ValidationProvider
+                name="message-feedback"
+                rules="required"
+                v-slot="{ errors }"
+              >
+                <textarea
+                  name="message-feedback"
+                  placeholder="Ваш вопрос, отзыв или пожелание*"
+                  class="grey-background form-control"
+                  v-model="message"
+                />
+                <span>{{ errors[0] }}</span>
+              </ValidationProvider>
+            </label>
+            <!--            <InputTextarea
+                          name="message-feedback"
+                          placeholder="Ваш вопрос, отзыв или пожелание*"
+                          :classTextarea="'form-item'"
+                          :uniq="'message-feedback'"
+                          :resize="false"
+                          :greyBackground="true"
+                          v-model="message"
+                        />-->
 
-             <div
-               class="feedback__error"
-             >Поле не должно быть пустым
-             </div>
-             <div
-               class="feedback__error"
-             >Введите корректный email
-             </div>
-           </div>
-         </div>-->
-
-        <div class="feedback__field feedback__text">
-          <InputTextarea
-            name="message-feedback"
-            placeholder="Ваш вопрос, отзыв или пожелание*"
-            :classTextarea="'form-item'"
-            :uniq="'message-feedback'"
-            :resize="false"
-            :greyBackground="true"
-            :error="errors.message"
-            v-model="message"
-          />
-
+          </div>
         </div>
 
-<!--        <InputCheck
-          labelText="Настоящим подтверждаю, что я ознакомлен и согласен с условиями оферты и политики конфиденциальности *"
-          :labelClass="'agree__label'"
-          :error="errors.agreeWithRules"
-          v-model="agreeWithRules"
-        />-->
-      </div>
+          <div class="form-item">
+            <label class="checkbox">
+              <ValidationProvider
+                name="agree"
+                rules="isAgree"
+                v-slot="{ errors }"
+                class="wrap-agree"
+              >
+                <input
+                  name="agree"
+                  type="checkbox"
+                  v-model="agreeWithRules"
+                >
+                <span class="checkmark"></span>
+                <span class="error-agree">{{ errors[0] }}</span>
+              </ValidationProvider>
+              Настоящим подтверждаю, что я ознакомлен и согласен с условиями оферты и политики конфиденциальности*
+            </label>
 
-      <div class="feedback__submit">
-        <Button
-          btn-type="submit"
-          btnText="Отправить"
-          :btn-class="'feedback__btn'"
-        />
-      </div>
-    </form>
+          </div>
+
+          <div class="feedback__submit">
+            <Button
+              btn-type="submit"
+              btnText="Отправить"
+              :btn-class="'feedback__btn'"
+            />
+          </div>
+      </form>
+    </ValidationObserver>
+
   </section>
 </template>
 
@@ -82,10 +113,9 @@ import InputCheck from "../../ui/InputCheck";
 import Button from "../../ui/Button";
 import InputTextarea from "../../ui/InputTextarea";
 
-// import {required, minLength, maxLength, email} from 'vuelidate/lib/validators'
+import Vue from 'vue'
 
-
-export default {
+export default Vue.extend({
   name: 'Feedback',
   components: {InputTextarea, Button, InputCheck},
   data() {
@@ -94,78 +124,56 @@ export default {
       email: '',
       message: '',
       agreeWithRules: false,
-      errors: {
-        userName: '',
-        email: '',
-        message: '',
-        agreeWithRules: null
-      }
     }
   },
-  // validations: {
-  //   userName: {minLength: minLength(5), required},
-  //   email: {email, required},
-  //   messageFeedback: {maxLength: maxLength(2048), required},
-  //   agreeWithRules: {
-  //     mustBeTrue(value) {
-  //       return value
-  //     }
-  //   },
-  // },
   methods: {
-    // formIsValid() {
-    //   let isValid = true
-    //
-    //   this.errorsFeedback = {
-    //     userName: '',
-    //     email: '',
-    //     messageFeedback: '',
-    //     agreeWithRules: null
-    //   }
-    //
-    //   this.$v.$touch()
-    //
-    //   if (this.$v.$error) {
-    //     isValid = false
-    //   }
-    //
-    //   if (!this.$v.messageFeedback.required) {
-    //     this.messageFeedback.required = "Поле не должно быть пустым";
-    //     isValid = false
-    //   }
-    //
-    //   if (!this.$v.agreeWithRules.mustBeTrue) {
-    //     this.errorsFeedback.agreeWithRules = "Необходимо подтвердить согласие";
-    //     isValid = false
-    //   }
-    //
-    //   return isValid
-    // },
     submitHandler() {
-      // if (this.formIsValid()) {
-        const formData = {
-          userName: this.userName,
-          email: this.email,
-          message: this.message,
-          agreeWithRules: this.agreeWithRules
-         }
-        console.log(formData)
-      // }
-
+      const formData = {
+        userName: this.userName,
+        email: this.email,
+        message: this.message,
+        agreeWithRules: this.agreeWithRules
+      }
+      console.log(formData)
     }
   }
 
-}
+})
 </script>
 
 <style lang="scss" scoped>
 @import "assets/styles/_variables.scss";
+
+.error-agree {
+  margin-top: 32px;
+}
+
+.wrap-agree {
+  position: absolute;
+  left: 0;
+  top: 5px;
+}
+
+.grey-background {
+  background: #f7f7f7;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 6px 10px;
+}
 
 .feedback {
   padding-bottom: 3rem;
   text-align: center;
   max-width: 680px;
   margin: 0 auto;
+
+  &__form {
+    span {
+      display: block;
+      color: #FF4749;
+    }
+  }
 
   &__title {
     font-size: 32px;
@@ -242,4 +250,5 @@ export default {
 .agree__label {
 
 }
+
 </style>
