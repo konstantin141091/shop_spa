@@ -38,8 +38,8 @@ export default {
 
   async created() {
     // вызываем запросы к бд, чтобы сохранить данные в store
-    await this.$store.dispatch('products/fetch')
-    await this.$store.dispatch('categories/fetch')
+    await this.$store.dispatch('products/fetch');
+    await this.$store.dispatch('categories/fetch');
     this.loading = false
   }
 }
