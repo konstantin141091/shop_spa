@@ -1,21 +1,16 @@
 <template>
   <div class="container">
-    <h1>Главная страница</h1>
     <div>
-      aSDDASdddddasdaSDasd
-      aSDDASdddddasdaSDasd
-      aSDDASdddddasdaSDasd
-      aSDDASdddddasdaSDasd
-      aSDDASdddddasdaSDasd
-      aSDDASdddddasdaSDasd
+      <Feedback />
     </div>
   </div>
 </template>
 
 <script>
 
+import Feedback from "~/components/main/home/Feedback";
 export default {
-
+  components: {Feedback}
 }
 </script>
 

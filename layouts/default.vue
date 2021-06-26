@@ -1,12 +1,10 @@
 <template>
   <div class="wrap">
     <Loader v-if="loading"/>
-    <div class="wrapper-layout" v-else>
+    <div class="wrapper-layout">
       <Header/>
       <main class="main-layout">
-        <keep-alive>
-          <router-view></router-view>
-        </keep-alive>
+        <nuxt />
       </main>
       <Footer/>
     </div>
@@ -20,22 +18,34 @@ import Loader from "../components/ui/Loader";
 
 export default {
   components: {Header, Footer, Loader},
+  async fetch({store}) {
+    try {
+      if (store.getters['products/all']) {
+        await store.dispatch('products/fetch')
+      }
+      if (store.getters['categories/all']) {
+        await store.dispatch('categories/fetch')
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  },
   data() {
     return {
       loading: false,
     }
   },
 
-  async mounted() {
+  async created() {
     // вызываем запросы к бд, чтобы сохранить данные в store
-    await this.$store.dispatch('products/GET_PRODUCTS');
-    await this.$store.dispatch('GET_CATEGORIES');
+    await this.$store.dispatch('products/fetch')
+    await this.$store.dispatch('categories/fetch')
     this.loading = false
   }
 }
 </script>
 <style lang="scss">
-#__nuxt, #__layout {
+#__nuxt, #__layout, .wrap {
   height: 100%;
 }
 </style>
