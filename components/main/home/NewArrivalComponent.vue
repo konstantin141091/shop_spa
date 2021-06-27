@@ -25,7 +25,7 @@
           :key="'new-product-' + item.id"
           :product-data="item"
           :image-url="item.img ? imageUrl + item.img : '/images/no_photo.png'"
-          @addToCart="addToCart"
+          @addToCart="handleAddToCart"
         />
       </VueSlickCarousel>
     </div>
@@ -90,9 +90,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions([
-      'ADD_TO_CART'
-    ]),
+    ...mapActions({addToCart: 'cart/addToCart'}),
     prevSlide() {
       this.$refs.slider.prev()
     },
@@ -100,14 +98,12 @@ export default {
     nextSlide() {
       this.$refs.slider.next()
     },
-    addToCart(data) {
-      console.log('заглушка');
-      // this.ADD_TO_CART(data)
-      // let timeStamp = Date.now().toLocaleString()
-      // this.messages.unshift(
-      //   {name: 'Товар добавлен в корзину!', id: timeStamp}
-      // )
-
+    handleAddToCart(data) {
+      this.addToCart(data);
+      let timeStamp = Date.now().toLocaleString();
+      this.messages.unshift(
+        {name: 'Товар добавлен в корзину!', id: timeStamp}
+      )
     },
   }
 }

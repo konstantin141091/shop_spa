@@ -74,9 +74,9 @@
           <nuxt-link to="/cart">
                     <span class="header__cart">
                         <img src="~/assets/icons/shopping_cart_black.svg" alt="корзина">
-                        <span class="header__cart-badge">{{ 10 }}</span>
+                        <span class="header__cart-badge">{{ cart.length }}</span>
                     </span>
-            <span class="header__cart-text">{{ 5555 }}&nbsp;руб</span>
+            <span class="header__cart-text">{{ total_price }}&nbsp;руб</span>
           </nuxt-link>
         </div>
       </div>
@@ -95,7 +95,7 @@
         <nuxt-link to="/cart">
                     <span class="header__cart">
                         <img src="~/assets/icons/shopping_cart_black.svg" alt="корзина">
-                        <span class="header__cart-badge">{{ 10 }}</span>
+                        <span class="header__cart-badge">{{ cart.length }}</span>
                     </span>
         </nuxt-link>
       </div>
@@ -104,10 +104,19 @@
 </template>
 
 <script>
+  import {mapGetters} from 'vuex'
 export default {
   name: "Header",
   data() {
     return ({})
+  },
+
+  computed: {
+    ...mapGetters({
+      cart: 'cart/all',
+      total_price: 'cart/total_price'
+    }),
+
   },
 
   // computed: {
