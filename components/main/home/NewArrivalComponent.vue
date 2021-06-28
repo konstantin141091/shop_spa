@@ -98,7 +98,7 @@ export default {
     nextSlide() {
       this.$refs.slider.next()
     },
-    handleAddToCart(data) {
+    async handleAddToCart(data) {
       this.addToCart(data);
       let timeStamp = Date.now().toLocaleString();
       this.messages.unshift(

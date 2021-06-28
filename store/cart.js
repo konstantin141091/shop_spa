@@ -1,14 +1,6 @@
 import Vue from 'vue'
 
 export const state = () => ({
-  // cart: () => {
-  //   if (process.browser) {
-  //     JSON.parse(localStorage.getItem('cart' ) || '[]')
-  //   } else {
-  //     JSON.parse( '[]')
-  //   }
-  // },
-  // TODO нужно решить вопрос с тем чтобы читать корзину из локал.сторадж
   cart: [],
   last_cart: [],
 });
@@ -24,17 +16,17 @@ export const mutations = {
     cartItem.quantity++;
     cartItem.totalPriceProduct = cartItem.quantity * cartItem.price
   },
-  save_cart: (state) => {
+  save_cart: (state, value) => {
     localStorage.setItem('cart', JSON.stringify(state.cart))
   },
-
-  // setCategories(state, categories) {
-  //   state.categories = categories
-  // }
+  init_cart: (state, value) => {
+    state.cart = value;
+  }
 };
 
+
 export const actions = {
-  addToCart: ({commit, state}, product) => {
+  addToCart: async function ({commit, state}, product) {
     const cartItem = state.cart.find(item => item.id === product.id);
     if (!cartItem) {
       commit('pushProductToCart', product)
@@ -44,13 +36,13 @@ export const actions = {
     commit('save_cart')
   },
 
-  // async cartState() {
-  //   if (localStorage) {
-  //     return JSON.parse(localStorage.getItem('cart' ) || '[]');
-  //   } else {
-  //     return [];
-  //   }
-  // }
+  initCart: async function({ commit}) {
+    if (process.browser) {
+      commit('init_cart', JSON.parse(localStorage.getItem('cart' ) || '[]'));
+    } else {
+      commit('init_cart', []);
+    }
+  }
 };
 
 export const getters = {
