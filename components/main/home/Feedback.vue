@@ -2,106 +2,95 @@
   <section class="feedback">
     <h2 class="feedback__title">Обратная связь</h2>
 
-    <ValidationObserver v-slot="{ invalid }">
+    <ValidationObserver v-slot="{handleSubmit}">
       <form
         method="post"
         class="feedback__form"
-        @submit.prevent="submitHandler"
+        @submit.prevent="handleSubmit(onSubmit)"
       >
-
         <div class="feedback__fields">
           <div class="feedback__field feedback__inputs">
-            <label class="feedback__mail feedback__input">
-              <ValidationProvider
-                name="user-name"
-                rules="required"
-                v-slot="{ errors }"
-              >
+            <ValidationProvider
+              name="Name"
+              rules="required|alpha_spaces"
+              v-slot="{ errors }"
+            >
+              <label class="feedback__mail feedback__input">
                 <input
-                  name="name"
+                  name="Name"
                   type="text"
                   placeholder="Имя*"
                   class="form-control"
-                  v-model.trim="userName"
+                  v-model.trim="formData.name"
                 >
                 <span>{{ errors[0] }}</span>
-              </ValidationProvider>
-            </label>
-            <label class="feedback__mail feedback__input">
-              <ValidationProvider
-                name="email"
-                rules="email|required"
-                v-slot="{ errors }"
-              >
+              </label>
+            </ValidationProvider>
+
+            <ValidationProvider
+              name="E-Mail"
+              rules="required|email"
+              v-slot="{ errors }"
+            >
+              <label class="feedback__mail feedback__input">
                 <input
-                  name="email"
-                  type="text"
+                  name="E-Mail"
+                  type="email"
                   placeholder="Ваша почта*"
                   class="form-control"
-                  v-model.trim="email"
+                  v-model.trim="formData.email"
                 >
                 <span>{{ errors[0] }}</span>
-              </ValidationProvider>
-            </label>
+              </label>
+            </ValidationProvider>
           </div>
 
+        </div>
+
+        <ValidationProvider
+          name="message-feedback"
+          rules="required"
+          v-slot="{ errors }"
+        >
           <div class="feedback__field feedback__text">
             <label class="feedback__mail feedback__input">
-              <ValidationProvider
-                name="message-feedback"
-                rules="required"
-                v-slot="{ errors }"
-              >
                 <textarea
                   name="message-feedback"
                   placeholder="Ваш вопрос, отзыв или пожелание*"
                   class="grey-background form-control"
-                  v-model="message"
+                  v-model="formData.message"
                 />
-                <span>{{ errors[0] }}</span>
-              </ValidationProvider>
             </label>
-            <!--            <InputTextarea
-                          name="message-feedback"
-                          placeholder="Ваш вопрос, отзыв или пожелание*"
-                          :classTextarea="'form-item'"
-                          :uniq="'message-feedback'"
-                          :resize="false"
-                          :greyBackground="true"
-                          v-model="message"
-                        />-->
-
+            <span>{{ errors[0] }}</span>
           </div>
-        </div>
+        </ValidationProvider>
 
-          <div class="form-item">
+
+        <div class="form-item">
+          <ValidationProvider
+            name="Accept Terms"
+            rules="required|isAgree"
+            v-slot="{ errors }"
+            tag="div"
+          >
             <label class="checkbox">
-              <ValidationProvider
-                name="agree"
-                rules="isAgree"
-                v-slot="{ errors }"
-                class="wrap-agree"
+              <input
+                name="Accept Terms"
+                type="checkbox"
+                v-model="formData.acceptTerms"
               >
-                <input
-                  name="agree"
-                  type="checkbox"
-                  v-model="agreeWithRules"
-                >
-                <span class="checkmark"></span>
-                <span class="error-agree">{{ errors[0] }}</span>
-              </ValidationProvider>
+              <span class="checkmark"></span>
               Настоящим подтверждаю, что я ознакомлен и согласен с условиями оферты и политики конфиденциальности*
             </label>
+            <span>{{ errors[0] }}</span>
+          </ValidationProvider>
+        </div>
 
-          </div>
-
-          <div class="feedback__submit">
-            <Button
-              btn-type="submit"
-              btnText="Отправить"
-              :btn-class="'feedback__btn'"
-            />
-          </div>
+        <div class="feedback__submit">
+          <button type="submit" class="feedback__btn button" tect="Submit" >
+            Отправить
+          </button>
+        </div>
       </form>
     </ValidationObserver>
 
@@ -120,21 +109,19 @@ export default Vue.extend({
   components: {InputTextarea, Button, InputCheck},
   data() {
     return {
-      userName: '',
-      email: '',
-      message: '',
-      agreeWithRules: false,
+      formData: {
+        name: '',
+        email: '',
+        message: '',
+        acceptTerms: null,
+      }
     }
   },
   methods: {
-    submitHandler() {
-      const formData = {
-        userName: this.userName,
-        email: this.email,
-        message: this.message,
-        agreeWithRules: this.agreeWithRules
-      }
-      console.log(formData)
+    onSubmit() {
+      if(this.formData) console.log(this.formData)
+      console.log()
+
     }
   }
 
@@ -143,6 +130,10 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
 @import "assets/styles/_variables.scss";
+
+//.button:disabled {
+//  background-color: grey;
+//}
 
 .error-agree {
   margin-top: 32px;
