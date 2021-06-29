@@ -55,12 +55,13 @@
             <input
               type="text"
               class="header__search-input"
-              placeholder="Поиск"
-
+              placeholder="Поиск товара"
+              v-on:keydown.enter="search(searchValue)"
+              v-model.trim.lazy="searchValue"
             >
             <button
               class="header__search-btn"
-
+              @click="search(searchValue)"
             >
               <img src="~/assets/icons/search_white.svg" alt="найти">
             </button>
@@ -112,12 +113,35 @@ export default {
   },
 
   computed: {
+    ...mapGetters([
+      'searchValue'
+    ]),
     ...mapGetters({
       cart: 'cart/all',
       total_price: 'cart/total_price'
     }),
+    // searchValue: {
+    //   get() {
+    //     return this.SEARCH_VALUE
+    //   },
+    //   set(value) {
+    //     this.GET_SEARCH_VALUE(value)
+    //   }
+    // },
+    // searchValue() {
+    //   return this.$store.getters['searchValue']
+    // },
 
   },
+  methods: {
+      search(value) {
+        this.$store.dispatch('getValue', value)
+        console.log(value)
+        if (this.$route.path !== '/products') {
+          this.$router.push('/products')
+        }
+      },
+  }
 
   // computed: {
   //   ...mapGetters([

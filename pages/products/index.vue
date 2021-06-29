@@ -57,18 +57,6 @@ import PaginationCatalog from "~/components/main/catalog/PaginationCatalog"
 
 export default {
   components: {PaginationCatalog, Button, InputCheck, Select},
-/*  async fetch({store}) {
-    try {
-      if (store.getters['products/all']) {
-        await store.dispatch('products/fetch')
-      }
-      if (store.getters['categories/all']) {
-        await store.dispatch('categories/fetch')
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  },*/
   data() {
     return {
       itemsSort: [
@@ -89,7 +77,6 @@ export default {
     products() {
       return this.$store.getters['products/all']
     },
-
     categories() {
       return this.$store.getters['categories/all']
     },
@@ -115,8 +102,10 @@ export default {
 
     //сортировка по селекту
     sortItem() {
+      // const products = [...this.filterProducts]
       if (this.sortType === 'name') {
-        return this.filterProducts.sort((a, b) => a.name.localeCompare(b.name))
+        // console.log('this.filterProducts', this.filterProducts.sort((a, b) => a.name.localeCompare(b.name)))
+        this.filterProducts.sort((a, b) => a.name.localeCompare(b.name))
       }
       if (this.sortType === 'min_price') {
         return this.filterProducts.sort((a, b) => a.price - b.price)
@@ -129,9 +118,9 @@ export default {
     //сортировка по поиску
     sortProductsBySearchValue(value) {
       this.sortedProducts = [...this.products]
-
-      if (value) {
-        this.sortedProducts = this.sortedProducts.filter(item => item.name.toLowerCase().includes(value.toLowerCase()))
+      const sortedProductsByWord = this.sortedProducts.filter(item => item.name.toLowerCase().includes(value.toLowerCase()))
+      if (sortedProductsByWord.length > 0) {
+        this.sortedProducts = [...sortedProductsByWord]
       } else {
         console.log('по вашему запросу ничего не найдено')
       }

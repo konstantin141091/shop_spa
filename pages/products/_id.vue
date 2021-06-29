@@ -38,12 +38,13 @@
 
 <script>
 import Button from "~/components/ui/Button"
-import {mapGetters} from 'vuex'
 
 export default {
   components: {Button},
   computed: {
-    ...mapGetters({productProxy: 'products/one'}),
+    productProxy() {
+      return this.$store.getters['products/one']
+    },
     id() {
       return +this.$route.params.id
     },
