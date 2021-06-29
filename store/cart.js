@@ -9,10 +9,10 @@ export const mutations = {
   pushProductToCart: (state, product) => {
     state.cart.push(product);
     Vue.set(product, 'quantity', 1);
-    Vue.set(product, 'totalPriceProduct', product.price);
+    Vue.set(product, 'totalPriceProduct', product.price)
   },
   increment: (state, index) => {
-    const cartItem = state.cart.find(item => item.id === index);
+    const cartItem = state.cart.find(item => item.id === index)
     cartItem.quantity++;
     cartItem.totalPriceProduct = cartItem.quantity * cartItem.price
   },
@@ -27,7 +27,7 @@ export const mutations = {
 
 export const actions = {
   addToCart: async function ({commit, state}, product) {
-    const cartItem = state.cart.find(item => item.id === product.id);
+    const cartItem = state.cart.find(item => item.id === product.id)
     if (!cartItem) {
       commit('pushProductToCart', product)
     } else {
@@ -38,9 +38,9 @@ export const actions = {
 
   initCart: async function({ commit}) {
     if (process.browser) {
-      commit('init_cart', JSON.parse(localStorage.getItem('cart' ) || '[]'));
+      commit('init_cart', JSON.parse(localStorage.getItem('cart' ) || '[]'))
     } else {
-      commit('init_cart', []);
+      commit('init_cart', [])
     }
   }
 };

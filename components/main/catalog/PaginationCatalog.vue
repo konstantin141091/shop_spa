@@ -29,7 +29,7 @@
         </div>
         <div class="product__btn">
           <button
-            @click="addToCart"
+            @click="handleAddToCart(product)"
           >В корзину
           </button>
         </div>
@@ -96,7 +96,7 @@ export default {
       this.$router.push(`/products/${productId}`)
     },
     addToCart(data) {
-      console.log('Add to cart', data)
+      this.$store.dispatch('cart/addToCart', data)
     },
     pageClick(page) {
       this.pageNumber = page
@@ -110,8 +110,14 @@ export default {
       if (this.pageNumber <= this.pages - 1) {
         this.pageNumber++
       }
-
-    }
+    },
+    async handleAddToCart(data) {
+      this.addToCart(data)
+      let timeStamp = Date.now().toLocaleString()
+      this.messages.unshift(
+        {name: 'Товар добавлен в корзину!', id: timeStamp}
+      )
+    },
   }
 
 }
