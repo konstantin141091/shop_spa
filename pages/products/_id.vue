@@ -51,7 +51,7 @@ export default {
       return this.productProxy(this.id)
     },
     hasProduct() {
-      return typeof this.product !== 'undefined';
+      return typeof this.product !== 'undefined'
     }
   }
 }
