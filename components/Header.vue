@@ -53,15 +53,15 @@
         <div class="header__search">
           <div class="header__search-form">
             <input
-              type="text"
+              type="search"
+              minlength="3"
               class="header__search-input"
               placeholder="Поиск товара"
-              v-on:keydown.enter="search(searchValue)"
-              v-model.trim.lazy="searchValue"
+              v-model.trim.lazy="searchProduct"
             >
             <button
               class="header__search-btn"
-              @click="search(searchValue)"
+              @click="search(searchProduct)"
             >
               <img src="~/assets/icons/search_white.svg" alt="найти">
             </button>
@@ -73,10 +73,10 @@
             <img src="~/assets/icons/person_black.svg" alt="аккаунт">
           </nuxt-link>
           <nuxt-link to="/cart">
-                    <span class="header__cart">
-                        <img src="~/assets/icons/shopping_cart_black.svg" alt="корзина">
-                        <span class="header__cart-badge">{{ cart.length }}</span>
-                    </span>
+            <span class="header__cart">
+              <img src="~/assets/icons/shopping_cart_black.svg" alt="корзина">
+              <span class="header__cart-badge">{{ cart.length }}</span>
+             </span>
             <span class="header__cart-text">{{ total_price }}&nbsp;руб</span>
           </nuxt-link>
         </div>
@@ -105,7 +105,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
   name: "Header",
@@ -121,22 +121,21 @@ export default {
       cart: 'cart/all',
       total_price: 'cart/total_price'
     }),
-    // searchValue: {
-    //   get() {
-    //     return this.SEARCH_VALUE
-    //   },
-    //   set(value) {
-    //     this.GET_SEARCH_VALUE(value)
-    //   }
-    // },
-    // searchValue() {
-    //   return this.$store.getters['searchValue']
-    // },
-
+    searchProduct: {
+      get() {
+        return this.searchValue
+      },
+      set(value) {
+        this.getValue(value)
+      }
+    },
   },
   methods: {
+    ...mapActions([
+      'getValue'
+    ]),
     search(value) {
-      this.$store.dispatch('getValue', value)
+      this.getValue(value)
       console.log(value)
       if (this.$route.path !== '/products') {
         this.$router.push('/products')
@@ -146,16 +145,8 @@ export default {
 
   // computed: {
   //   ...mapGetters([
-  //     'CART', 'TOTAL_PRICE_CART', 'SEARCH_VALUE'
+  //     'CART', 'TOTAL_PRICE_CART'
   //   ]),
-  //   searchValue: {
-  //     get() {
-  //       return this.SEARCH_VALUE
-  //     },
-  //     set(value) {
-  //       this.GET_SEARCH_VALUE(value)
-  //     }
-  //   },
   //   ...mapGetters({
   //     authenticated: 'auth/AUTHENTICATED',
   //     user: 'auth/USER',
@@ -165,18 +156,8 @@ export default {
   // methods: {
   //   ...mapActions({
   //     signOutAction: 'auth/SIGN_OUT'
-  //   }),
-  //   ...mapActions([
-  //     'GET_SEARCH_VALUE'
-  //   ]),
-  //
-  //   search(value) {
-  //     this.GET_SEARCH_VALUE(value)
-  //     if (this.$route.path !== '/products') {
-  //       this.$router.push('/products')
-  //     }
-  //   },
-  //
+  //   })
+
   //   async signOut() {
   //     await this.signOutAction();
   //     await this.$router.push('/products');

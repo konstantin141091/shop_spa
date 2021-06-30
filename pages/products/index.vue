@@ -80,6 +80,9 @@ export default {
     categories() {
       return this.$store.getters['categories/all']
     },
+    searchValue() {
+      return this.$store.getters['searchValue']
+    },
     filterProducts() {
       if (this.sortedProducts.length) {
         return this.sortedProducts
@@ -108,10 +111,10 @@ export default {
         this.filterProducts.sort((a, b) => a.name.localeCompare(b.name))
       }
       if (this.sortType === 'min_price') {
-        return this.filterProducts.sort((a, b) => a.price - b.price)
+        this.filterProducts.sort((a, b) => a.price - b.price)
       }
       if (this.sortType === 'max_price') {
-        return this.filterProducts.sort((a, b) => b.price - a.price)
+        this.filterProducts.sort((a, b) => b.price - a.price)
       }
     },
 
@@ -127,8 +130,8 @@ export default {
     }
   },
   watch: {
-    SEARCH_VALUE() {
-      this.sortProductsBySearchValue(this.SEARCH_VALUE)
+    searchValue() {
+      this.sortProductsBySearchValue(this.searchValue)
     }
   },
 }
