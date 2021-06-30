@@ -8,8 +8,8 @@
       <ProductCardComponent
         v-for="item in paginatedData"
         :key="'new-product-' + item.id"
-        :product-data="item"
-        :image-url="item.img ? imageUrl + item.img : '/images/no_photo.png'"
+        :productData="item"
+        :imageUrl="item.img ? imageUrl + item.img : '/images/no_photo.png'"
         @addToCart="handleAddToCart(item)"
       />
     </div>

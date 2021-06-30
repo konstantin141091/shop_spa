@@ -77,7 +77,7 @@
               <img src="~/assets/icons/shopping_cart_black.svg" alt="корзина">
               <span class="header__cart-badge">{{ cart.length }}</span>
              </span>
-            <span class="header__cart-text">{{ total_price }}&nbsp;руб</span>
+            <span class="header__cart-text">{{ totalPrice }}&nbsp;руб</span>
           </nuxt-link>
         </div>
       </div>
@@ -119,7 +119,7 @@ export default {
     ]),
     ...mapGetters({
       cart: 'cart/all',
-      total_price: 'cart/total_price'
+      totalPrice: 'cart/totalPrice'
     }),
     searchProduct: {
       get() {

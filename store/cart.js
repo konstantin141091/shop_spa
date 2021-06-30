@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 export const state = () => ({
   cart: [],
-  last_cart: [],
+  lastCart: [],
 });
 
 export const mutations = {
@@ -11,15 +11,28 @@ export const mutations = {
     Vue.set(product, 'quantity', 1);
     Vue.set(product, 'totalPriceProduct', product.price)
   },
+  removeFromCart: (state, index) => {
+    state.cart.splice(index, 1)
+  },
   increment: (state, index) => {
     const cartItem = state.cart.find(item => item.id === index)
     cartItem.quantity++;
     cartItem.totalPriceProduct = cartItem.quantity * cartItem.price
   },
-  save_cart: (state, value) => {
+  decrement: ( state, index) => {
+    const cartItem = state.cart.find(item => item.id === index);
+    if (cartItem.quantity > 1) {
+      cartItem.quantity--
+      cartItem.totalPriceProduct = cartItem.quantity * cartItem.price
+    }
+  },
+  deleteAllCart: (state) => {
+    state.cart = [];
+  },
+  saveCart: (state, value) => {
     localStorage.setItem('cart', JSON.stringify(state.cart))
   },
-  init_cart: (state, value) => {
+  initCart: (state, value) => {
     state.cart = value;
   }
 };
@@ -33,21 +46,41 @@ export const actions = {
     } else {
       commit('increment', product.id)
     }
-    commit('save_cart')
+    commit('saveCart')
   },
 
   initCart: async function({ commit}) {
     if (process.browser) {
-      commit('init_cart', JSON.parse(localStorage.getItem('cart' ) || '[]'))
+      commit('initCart', JSON.parse(localStorage.getItem('cart' ) || '[]'))
     } else {
-      commit('init_cart', [])
+      commit('initCart', [])
     }
-  }
+  },
+
+  decrementToProduct: ({commit}, index) => {
+    commit('decrement', index)
+    commit('saveCart')
+  },
+  incrementToProduct: ({commit}, index) => {
+    commit('increment', index)
+    commit('saveCart')
+  },
+
+  deleteFromCart: ({commit}, index) => {
+    commit('removeFromCart', index);
+    commit('saveCart')
+  },
+
+  clearCart: ({commit}) => {
+    commit('copyCart');
+    localStorage.clear();
+    commit('deleteAllCart');
+  },
 };
 
 export const getters = {
   all: state => state.cart,
-  total_price: state => {
+  totalPrice: state => {
     return state.cart.reduce((total, product) => {
       return total + product.quantity * product.price
     }, 0)
