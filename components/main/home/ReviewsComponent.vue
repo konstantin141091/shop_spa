@@ -42,7 +42,6 @@ export default {}
 </script>
 
 <style lang="scss" scoped>
-  @import "assets/styles/_variables.scss";
 
 .reviews {
   padding-bottom: 3rem;

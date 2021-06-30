@@ -105,7 +105,8 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+import {mapGetters} from 'vuex'
+
 export default {
   name: "Header",
   data() {
@@ -134,13 +135,13 @@ export default {
 
   },
   methods: {
-      search(value) {
-        this.$store.dispatch('getValue', value)
-        console.log(value)
-        if (this.$route.path !== '/products') {
-          this.$router.push('/products')
-        }
-      },
+    search(value) {
+      this.$store.dispatch('getValue', value)
+      console.log(value)
+      if (this.$route.path !== '/products') {
+        this.$router.push('/products')
+      }
+    },
   }
 
   // computed: {
@@ -186,7 +187,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/styles/_variables.scss";
 
 .header {
   display: none;

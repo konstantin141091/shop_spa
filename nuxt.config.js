@@ -20,6 +20,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/styles/nullstyle.scss',
     '~/assets/styles/app.scss'
   ],
 
@@ -39,8 +40,13 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
+    '@nuxtjs/style-resources'
   ],
+
+  styleResources: {
+    scss: ['~/assets/styles/variables.scss']
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

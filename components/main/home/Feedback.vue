@@ -87,7 +87,7 @@
         </div>
 
         <div class="feedback__submit">
-          <button type="submit" class="feedback__btn button" tect="Submit" >
+          <button type="submit" class="feedback__btn button" tect="Submit">
             Отправить
           </button>
         </div>
@@ -119,7 +119,7 @@ export default Vue.extend({
   },
   methods: {
     onSubmit() {
-      if(this.formData) console.log(this.formData)
+      if (this.formData) console.log(this.formData)
       console.log()
 
     }
@@ -129,7 +129,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-@import "assets/styles/_variables.scss";
 
 //.button:disabled {
 //  background-color: grey;

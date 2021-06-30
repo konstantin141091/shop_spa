@@ -135,7 +135,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/styles/_variables.scss";
 
 .catalog {
   &__top {
