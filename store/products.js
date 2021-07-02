@@ -1,11 +1,3 @@
-//   getters: {
-//     PRODUCTS: state => state.products,
-//     PRODUCTS_NEW: state => state.products.filter(products => products.news),
-//     PRODUCTS_SALE: state => state.products.filter(products => products.sale > 0),
-//     PRODUCT_ONE: state => id => state.products.find(pr => pr.id === id),
-//   },
-// }
-
 export const state = () => ({
   products: []
 });

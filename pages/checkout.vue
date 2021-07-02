@@ -17,6 +17,7 @@
               id="client-name"
               name="Client Name"
               placeholder="Фамилия Имя"
+              v-model="name"
             >
             <span>ошибка</span>
           </div>
@@ -28,6 +29,7 @@
               id="client-tel"
               name="Client Phone"
               placeholder="917-000-00-00"
+              v-model="numberPhone"
             >
             <span>ошибка</span>
           </div>
@@ -44,6 +46,7 @@
               id="client-address"
               name="Client Address"
               placeholder="Челябинская область, г. Магнитогорск, ул. Полевая, д.0"
+              v-model="deliveryAddress"
             >
             <span>ошибка</span>
           </div>
@@ -62,13 +65,23 @@
 
           <div class="form-control">
             <label for="comment">Комментарии к заказу</label>
-            <input type="email" id="comment" name="Comment">
+            <input
+              type="text"
+              id="comment"
+              name="Comment"
+              v-model="text"
+            >
             <span></span>
           </div>
 
           <div class="form-control">
             <label for="email">Email</label>
-            <input type="email" id="email" name="E-mail">
+            <input
+              type="email"
+              id="email"
+              name="E-mail"
+              v-model="email"
+            >
             <span></span>
           </div>
 
@@ -85,7 +98,7 @@
 
       </form>
 
-      <BasketItemList />
+      <BasketItemList/>
     </div>
 
   </div>
@@ -98,14 +111,14 @@ import BasketItemList from "~/components/main/checkout/BasketItemList";
 import {mapGetters} from 'vuex'
 
 export default {
-  components: { BasketItemList, Loader },
+  components: {BasketItemList, Loader},
   data() {
     return {
       name: '',
       numberPhone: '',
       deliveryAddress: '',
       deliveryMethod: 'самовывоз',
-      deliveryText: '',
+      text: '',
       email: '',
       loading: false,
 
@@ -114,58 +127,49 @@ export default {
 
   computed: {
     ...mapGetters([
-      'cart/all', 'cart/totalPrice'
+      // 'cart/all', 'cart/totalPrice'
     ]),
     ...mapGetters({
       // authenticated: 'auth/AUTHENTICATED',
       // user: 'auth/USER',
-    })
+    }),
+    totalPrice() {
+      return this.$store.getters['cart/totalPrice']
+    }
   },
 
   methods: {
-
     formIsValid() {
-
+      return true
     },
 
     submitHandler() {
-      console.log('start');
+      console.log('start')
       if (this.formIsValid()) {
+        this.handleCreateOrder()
       }
-      console.log('no');
+      console.log('no')
     },
 
     async handleCreateOrder() {
-      this.loading = true;
-      const basketResponse = await this.$store.dispatch('API_ADD_CART', this.CART);
-      if (basketResponse.status === 204) {
-
-        const order = {
-          name: this.userName,
-          phone: this.userNumberPhone,
-          email: this.email,
-          address: this.deliveryAddress,
-          comment: this.deliveryText,
-          delivery_method: this.deliveryMethod,
-          delivery_cost: 1000,
-          total_price: this.totalPrice,
-        };
-        const orderResponse = await this.$store.dispatch('API_ADD_ORDER', order);
-        if (orderResponse.status === 201) {
-          console.log('Заказ добавился в бд. Нужно как то сказать об этом юзеру');
-          console.log('Нужно скинуть корзину в local storage');
-          await this.$store.dispatch('CLEAR_CART');
-          await this.$router.push('/order');
-        } else {
-          console.log('Ошибка. Не удалось добавить заказ в бд!', orderResponse.status);
-        }
-
-      } else {
-        console.log('Ошибка. Не удалось добавить корзину в бд!');
+      const order = {
+        name: this.name,
+        phone: this.numberPhone,
+        email: this.email,
+        address: this.deliveryAddress,
+        comment: this.text,
+        delivery_method: this.deliveryMethod,
+        delivery_cost: 1000,
+        total_price: this.totalPrice,
       }
-      this.loading = false;
-    },
 
+      // console.log(order)
+      this.loading = true
+      await this.$store.dispatch('cart/apiAddCart', order)
+      // await this.$store.dispatch('cart/clearCart')
+      await this.$router.push('/order');
+      this.loading = false
+    },
 
   },
 

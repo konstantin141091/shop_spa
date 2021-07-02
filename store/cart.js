@@ -76,6 +76,9 @@ export const actions = {
     localStorage.clear();
     commit('deleteAllCart');
   },
+  apiAddCart: async function({ state, commit, dispatch }, order) {
+    console.log('order', order)
+  },
 };
 
 export const getters = {
@@ -84,5 +87,6 @@ export const getters = {
     return state.cart.reduce((total, product) => {
       return total + product.quantity * product.price
     }, 0)
-  }
+  },
+  lastCart: state => state.lastCart
 };
