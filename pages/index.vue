@@ -3,9 +3,8 @@
     <PromoComponent/>
     <NewArrivalComponent/>
     <BenefitListComponent/>
-    <PromotionsComponent/>
+<!--    <PromotionsComponent/>-->
     <ReviewsComponent/>
-
     <Feedback />
   </div>
 </template>

@@ -11,12 +11,14 @@
   "dependencies": {
     "@nuxtjs/auth-next": "5.0.0-1624817847.21691f1",
     "@nuxtjs/axios": "^5.13.6",
+    "@nuxtjs/style-resources": "^1.2.0",
     "axios": "^0.21.1",
     "core-js": "^3.9.1",
     "nuxt": "^2.15.3",
     "nuxt-validate": "^1.0.1",
     "vee-validate": "^3.4.10",
-    "vue-slick-carousel": "^1.0.6"
+    "vue-slick-carousel": "^1.0.6",
+    "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.6",

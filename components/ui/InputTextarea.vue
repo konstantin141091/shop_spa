@@ -15,20 +15,20 @@
       :value="title"
       @change="$emit('change', $event.target.value)"
     ></textarea>
-  <small v-if="error" class="error-label">{{ error }}</small>
+    <small v-if="error" class="error-label">{{ error }}</small>
   </div>
 </template>
 
 <script>
 export default {
-    model: {
-        prop: 'title',
-        event: 'change'
-    },
+  model: {
+    prop: 'title',
+    event: 'change'
+  },
 
   props: {
-      title: String,
-      value: String,
+    title: String,
+    value: String,
     placeholder: {
       type: String,
       default: ""
@@ -48,7 +48,7 @@ export default {
       type: Boolean,
       default: true
     },
-    classTextarea:{
+    classTextarea: {
       type: String,
       default: ""
     },
@@ -62,23 +62,20 @@ export default {
     }
   },
 
-  computed: {
-
-  }
+  computed: {}
 };
 </script>
 <style lang="scss" scoped>
-@import "assets/styles/_variables";
 
 .resize {
   resize: none;
 }
 
 .grey-background {
-    background: #f7f7f7;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 16px;
-    padding: 6px 10px;
+  background: #f7f7f7;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 6px 10px;
 }
 </style>

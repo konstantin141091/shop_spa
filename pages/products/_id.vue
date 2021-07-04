@@ -38,12 +38,13 @@
 
 <script>
 import Button from "~/components/ui/Button"
-import {mapGetters} from 'vuex'
 
 export default {
   components: {Button},
   computed: {
-    ...mapGetters({productProxy: 'products/one'}),
+    productProxy() {
+      return this.$store.getters['products/one']
+    },
     id() {
       return +this.$route.params.id
     },
@@ -51,14 +52,13 @@ export default {
       return this.productProxy(this.id)
     },
     hasProduct() {
-      return typeof this.product !== 'undefined';
+      return typeof this.product !== 'undefined'
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import "assets/styles/_variables.scss";
 
 .flex-box {
   display: flex;

@@ -1,15 +1,15 @@
 <template>
     <div>
-
+        <p>Ваша корзина пуста</p>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'Textarea'
+    name: 'CartEmpty'
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 
 </style>

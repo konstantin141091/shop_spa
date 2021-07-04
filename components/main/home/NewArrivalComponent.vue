@@ -11,10 +11,10 @@
 <!--          TODO вот здесь в батанах стрелки не грузятся-->
 <!--          <img src="~/assets/icons/arrow-right.svg" alt="">-->
           <button @click="prevSlide" class="btn-prev" :class="{disabled: isDisabled}"
-                  :style="{background: 'url(\'~/assets/icons/arrow-left.svg\') 0 0 / 100% no-repeat'}">🠐
+                  :style="{background: `url(${require('~/assets/icons/arrow-left.svg')}) 0 0 / 100% no-repeat`}">🠐
           </button>
           <button @click="nextSlide" class="btn-next"
-                  :style="{background: 'url(\'~/assets/icons/arrow-right.svg\') 0 0 / 100% no-repeat'}">🠒
+                  :style="{background: `url(${require('~/assets/icons/arrow-right.svg')}) 0 0 / 100% no-repeat`}">🠒
           </button>
         </div>
       </div>
@@ -25,7 +25,7 @@
           :key="'new-product-' + item.id"
           :product-data="item"
           :image-url="item.img ? imageUrl + item.img : '/images/no_photo.png'"
-          @addToCart="handleAddToCart"
+          @addToCart="handleAddToCart(item)"
         />
       </VueSlickCarousel>
     </div>
@@ -33,13 +33,14 @@
 </template>
 
 <script>
+
 import ProductCardComponent from "../products/ProductCardComponent";
-import {mapActions} from "vuex/dist/vuex.mjs";
 import Loader from "../../ui/Loader";
 import SuccessMessageComponent from "../SuccessMessageComponent";
 import Notification from "../../ui/Notification";
 import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+
 export default {
   name: 'NewArrivalComponent',
   components: {Notification, SuccessMessageComponent, Loader, ProductCardComponent, VueSlickCarousel},
@@ -90,7 +91,9 @@ export default {
     },
   },
   methods: {
-    ...mapActions({addToCart: 'cart/addToCart'}),
+    addToCart(data) {
+      this.$store.dispatch('cart/addToCart', data)
+    },
     prevSlide() {
       this.$refs.slider.prev()
     },
@@ -98,12 +101,13 @@ export default {
     nextSlide() {
       this.$refs.slider.next()
     },
-    async handleAddToCart(data) {
-      this.addToCart(data);
-      let timeStamp = Date.now().toLocaleString();
+    handleAddToCart(data) {
+      this.addToCart(data)
+      let timeStamp = Date.now().toLocaleString()
       this.messages.unshift(
         {name: 'Товар добавлен в корзину!', id: timeStamp}
       )
+
     },
   }
 }
