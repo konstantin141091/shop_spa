@@ -16,14 +16,13 @@ export const mutations = {
     cartItem.quantity++;
     cartItem.totalPriceProduct = cartItem.quantity * cartItem.price
   },
-  save_cart: (state, value) => {
+  save_cart: (state) => {
     localStorage.setItem('cart', JSON.stringify(state.cart))
   },
   init_cart: (state, value) => {
     state.cart = value;
   }
 };
-
 
 export const actions = {
   addToCart: async function ({commit, state}, product) {
