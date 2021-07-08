@@ -2,32 +2,31 @@
   <footer>
     <div class="footer__top">
       <div class="footer__area-menu container">
-        <div class="menu__item">
-          <p class="menu__title">О магазине</p>
-          <router-link to="/contacts" class="menu__link">Адреса магазинов</router-link>
-          <router-link to="/promotions" class="menu__link">Акции и скидки</router-link>
-          <router-link to="/" class="menu__link">Юридическим лицам</router-link>
-          <router-link to="/" class="menu__link">Как заказать</router-link>
-          <router-link to="/return-policy" class="menu__link">Обмен и возврат</router-link>
-        </div>
-
-        <div class="menu__item">
-          <p class="menu__title">Покупателям</p>
-          <router-link to="/account/history" class="menu__link">Личный кабинет</router-link>
-          <router-link to="/" class="menu__link">Мои заказы</router-link>
-          <router-link to="/" class="menu__link">Вопросы и ответы</router-link>
-          <router-link to="/return-policy" class="menu__link">Политика возврата</router-link>
-        </div>
-
-        <div class="menu__item">
-          <p class="menu__title">Информация</p>
-          <router-link to="/offer" class="menu__link">Политика конфиденциальности и оферта</router-link>
-          <router-link to="/user-agreement" class="menu__link">Пользовательское соглашение</router-link>
+        <div
+          class="menu__item"
+          v-for="m in menu"
+        >
+          <div class="menu__title" @click="m.visible=!m.visible">
+            <p>{{ m.name }}</p>
+            <button class="menu__show-btn" type="button">
+              <fa :icon="['fas', 'chevron-down']" class="icon"/>
+            </button>
+          </div>
+          <div v-show="m.visible">
+            <nuxt-link
+              v-for="(item, index) in m.items"
+              :key="index"
+              :to="item.link"
+              class="menu__link"
+              v-text="item.title"
+            ></nuxt-link>
+          </div>
         </div>
       </div>
     </div>
+
     <div class="footer__bottom">
-      &copy;&nbsp;2021&nbsp;Любое использование контента без письменного разрешения запрещено <!--{{ date | date('year') }}-->
+      &copy;&nbsp;{{ date }}&nbsp;Любое использование контента без письменного разрешения запрещено
     </div>
   </footer>
 </template>
@@ -37,8 +36,43 @@ export default {
   name: 'Footer',
   data() {
     return {
-      date: new Date()
+      date: null,
+      menu: {
+        menuAbout: {
+          name: "О магазине",
+          visible: false,
+          items: [
+            {title: 'Адреса магазинов', link: '/contacts'},
+            {title: 'Акции и скидки', link: '/promotions'},
+            {title: 'Юридическим лицам', link: '/return-policy'},
+            // {title: 'Как заказать', link: '/contacts'},
+            {title: 'Обмен и возврат', link: '/return-policy'},
+          ]
+        },
+        menuCustomer: {
+          name: "Покупателям",
+          visible: false,
+          items: [
+            {title: 'Личный кабинет', link: '/account/history'},
+            {title: 'Мои заказы', link: '/account/history'},
+            {title: 'Вопросы и ответы', link: '/account/history'},
+            {title: 'Политика возврата', link: '/return-policy'},
+          ]
+        },
+        menuInfo: {
+          name: "Информация",
+          visible: false,
+          items: [
+            {title: 'Политика конфиденциальности и оферта', link: '/offer'},
+            {title: 'Пользовательское соглашение', link: '/user-agreement'},
+          ]
+        },
+      }
     }
+  },
+  methods: {},
+  created() {
+    this.date = new Intl.DateTimeFormat('ru-Ru', {'year': 'numeric'}).format(new Date())
   }
 }
 </script>
@@ -55,16 +89,19 @@ export default {
     padding-top: 3rem;
     padding-bottom: 3rem;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
-    justify-content: center;
   }
 
   &__bottom {
     background: #ffffff;
-    height: 5rem;
     color: $colorText;
     text-align: center;
-    line-height: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 7rem;
   }
 }
 
@@ -75,27 +112,47 @@ export default {
   }
 
   &__item + &__item {
-    margin-left: 6rem;
+    margin-top: 3rem;
   }
 
   &__title {
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    font-size: 1.6rem;
+    padding: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+
+    & > p {
+      font-weight: bold;
+      font-size: 1.6rem;
+    }
   }
 
   &__link {
     display: block;
     color: $colorText;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
+    padding-left: 1rem;
+    margin-top: 1.5rem;
 
     &:hover {
       color: $colorBtn;
     }
   }
 
-  &__link + &__link {
-    margin-top: 1.5rem;
+  &__show-btn {
+    background: none;
+
+    .icon {
+      //color: red;
+    }
   }
 }
+
+@media (min-width: 768px) {
+  .menu {
+    &__link {
+      color: red;
+    }
+  }
+}
+
 </style>

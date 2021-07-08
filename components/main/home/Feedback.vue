@@ -14,6 +14,8 @@
               name="Name"
               rules="required|alpha_spaces"
               v-slot="{ errors }"
+              tag="div"
+              class="feedback__input-wrap"
             >
               <label class="feedback__mail feedback__input">
                 <input
@@ -31,6 +33,8 @@
               name="E-Mail"
               rules="required|email"
               v-slot="{ errors }"
+              tag="div"
+              class="feedback__input-wrap"
             >
               <label class="feedback__mail feedback__input">
                 <input
@@ -51,6 +55,7 @@
           name="message-feedback"
           rules="required"
           v-slot="{ errors }"
+          tag="div"
         >
           <div class="feedback__field feedback__text">
             <label class="feedback__mail feedback__input">
@@ -121,7 +126,6 @@ export default Vue.extend({
     onSubmit() {
       if (this.formData) console.log(this.formData)
       console.log()
-
     }
   }
 
@@ -221,8 +225,9 @@ export default Vue.extend({
   }
 }
 
-.feedback__input:first-child {
+.feedback__input-wrap {
   margin-bottom: 2rem;
+
   @media (min-width: 565px) {
     margin-bottom: 0;
   }

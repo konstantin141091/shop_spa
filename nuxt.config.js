@@ -37,7 +37,15 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/fontawesome'
   ],
+  fontawesome: {
+    component: 'fa',
+    icons: {
+      solid: true,
+      brand: true
+    }
+  },
 
   modules: [
     '@nuxtjs/axios',

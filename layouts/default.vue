@@ -41,7 +41,7 @@ export default {
   // },
   data() {
     return {
-      loading: false,
+      loading: true,
     }
   },
   computed: {
@@ -54,10 +54,21 @@ export default {
 
   async created() {
     // вызываем запросы к бд, чтобы сохранить данные в store
-    await this.$store.dispatch('products/fetch');
-    await this.$store.dispatch('categories/fetch');
-    this.$store.dispatch('cart/initCart');
+    await this.$store.dispatch('products/fetch')
+    await this.$store.dispatch('categories/fetch')
+    this.$store.dispatch('cart/initCart')
     this.loading = false
+  },
+  mounted() {
+    window.addEventListener('resize', () => {
+      if(window.innerWidth > 767) {
+        this.$store.dispatch('setDesktop')
+        console.log('desktop', this.$store.getters['isDesktop'])
+      } else {
+        this.$store.dispatch('setMobile')
+        console.log('mobile', this.$store.getters['isMobile'])
+      }
+    })
   }
 }
 </script>
