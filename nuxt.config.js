@@ -29,7 +29,8 @@ export default {
   plugins: [
     "~plugins/validate.js",
     // { src: '~/plugins/paginate.client.js' }
-    "~plugins/paginate.client.js"
+    "~plugins/paginate.client.js",
+    "~plugins/vueSlickCarousel.client.js",
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
