@@ -1,6 +1,6 @@
 <template>
   <section class="benefit-list">
-    <h2 class="benefit-list__title">Наши плюсы</h2>
+    <h2 class="section__title">Наши плюсы</h2>
 
     <div class="benefit-list__box">
       <article>
@@ -35,12 +35,6 @@ export default {}
 
 .benefit-list {
   padding-bottom: 3rem;
-
-  &__title {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 3rem;
-  }
 
   &__box {
     display: flex;

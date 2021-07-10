@@ -1,11 +1,14 @@
 <template>
-<!--  <div></div>-->
+  <!--  <div></div>-->
   <div class="wrap">
     <Loader v-if="loading"/>
-    <div class="wrapper-layout">
+    <div
+      class="wrapper-layout"
+      v-else
+    >
       <Header/>
       <main class="main-layout">
-        <nuxt />
+        <nuxt/>
       </main>
       <Footer/>
     </div>
@@ -13,9 +16,35 @@
 </template>
 
 <script>
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import Loader from "../components/ui/Loader";
+import Header from "../components/Header"
+import Footer from "../components/Footer"
+import Loader from "../components/ui/Loader"
+
+const isMobile = {
+  Android: function () {
+    return navigator.userAgent.match(/Android/i)
+  },
+  BlackBerry: function () {
+    return navigator.userAgent.match(/BlackBerry/i)
+  },
+  iOS: function () {
+    return navigator.userAgent.match(/iPhone|iPad|iPod/i)
+  },
+  Opera: function () {
+    return navigator.userAgent.match(/Opera Mini/i)
+  },
+  Windows: function () {
+    return navigator.userAgent.match(/IEMobile/i)
+  },
+  any: function () {
+    return (
+      isMobile.Android() ||
+      isMobile.BlackBerry() ||
+      isMobile.iOS() ||
+      isMobile.Opera() ||
+      isMobile.Windows())
+  },
+}
 
 export default {
   components: {Header, Footer, Loader},
@@ -52,6 +81,18 @@ export default {
     // }
   },
 
+  methods: {
+    initDevice() {
+      if (!isMobile.any() || window.innerWidth > 768) {
+        this.$store.dispatch('setDesktop')
+        console.log('desktop', this.$store.getters['isDesktop'])
+      } else {
+        this.$store.dispatch('setMobile')
+        console.log('mobile', this.$store.getters['isMobile'])
+      }
+    }
+  },
+
   async created() {
     // вызываем запросы к бд, чтобы сохранить данные в store
     await this.$store.dispatch('products/fetch')
@@ -60,16 +101,9 @@ export default {
     this.loading = false
   },
   mounted() {
-    window.addEventListener('resize', () => {
-      if(window.innerWidth > 767) {
-        this.$store.dispatch('setDesktop')
-        console.log('desktop', this.$store.getters['isDesktop'])
-      } else {
-        this.$store.dispatch('setMobile')
-        console.log('mobile', this.$store.getters['isMobile'])
-      }
-    })
-  }
+    //принудительно обновить браузер или придумать альтернативу
+    this.initDevice()
+  },
 }
 </script>
 <style lang="scss">

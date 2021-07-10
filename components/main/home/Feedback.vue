@@ -1,6 +1,6 @@
 <template>
   <section class="feedback">
-    <h2 class="feedback__title">Обратная связь</h2>
+    <h2 class="section__title">Обратная связь</h2>
 
     <ValidationObserver v-slot="{handleSubmit}">
       <form
@@ -10,64 +10,57 @@
       >
         <div class="feedback__fields">
           <div class="feedback__field feedback__inputs">
+
             <ValidationProvider
               name="Name"
               rules="required|alpha_spaces"
               v-slot="{ errors }"
-              tag="div"
-              class="feedback__input-wrap"
+              tag="label"
+              class="feedback__input"
             >
-              <label class="feedback__mail feedback__input">
-                <input
-                  name="Name"
-                  type="text"
-                  placeholder="Имя*"
-                  class="form-control"
-                  v-model.trim="formData.name"
-                >
-                <span>{{ errors[0] }}</span>
-              </label>
+              <input
+                name="Name"
+                type="text"
+                placeholder="Имя*"
+                class="form-control grey-background"
+                v-model.trim="formData.name"
+              >
+              <span>{{ errors[0] }}</span>
             </ValidationProvider>
 
             <ValidationProvider
               name="E-Mail"
               rules="required|email"
               v-slot="{ errors }"
-              tag="div"
-              class="feedback__input-wrap"
+              tag="label"
+              class="feedback__input"
             >
-              <label class="feedback__mail feedback__input">
-                <input
-                  name="E-Mail"
-                  type="email"
-                  placeholder="Ваша почта*"
-                  class="form-control"
-                  v-model.trim="formData.email"
-                >
-                <span>{{ errors[0] }}</span>
-              </label>
+              <input
+                name="E-Mail"
+                type="email"
+                placeholder="Ваша почта*"
+                class="form-control grey-background"
+                v-model.trim="formData.email"
+              >
+              <span>{{ errors[0] }}</span>
             </ValidationProvider>
           </div>
-
         </div>
 
         <ValidationProvider
           name="message-feedback"
           rules="required"
           v-slot="{ errors }"
-          tag="div"
+          tag="label"
+          class="feedback__field"
         >
-          <div class="feedback__field feedback__text">
-            <label class="feedback__mail feedback__input">
-                <textarea
-                  name="message-feedback"
-                  placeholder="Ваш вопрос, отзыв или пожелание*"
-                  class="grey-background form-control"
-                  v-model="formData.message"
-                />
-            </label>
-            <span>{{ errors[0] }}</span>
-          </div>
+            <textarea
+              name="message-feedback"
+              placeholder="Ваш вопрос, отзыв или пожелание*"
+              class="grey-background form-control"
+              v-model="formData.message"
+            />
+          <span>{{ errors[0] }}</span>
         </ValidationProvider>
 
 
@@ -77,6 +70,7 @@
             rules="required|isAgree"
             v-slot="{ errors }"
             tag="div"
+            class="checkbox-wrap"
           >
             <label class="checkbox">
               <input
@@ -103,15 +97,11 @@
 </template>
 
 <script>
-import InputCheck from "../../ui/InputCheck";
-import Button from "../../ui/Button";
-import InputTextarea from "../../ui/InputTextarea";
 
 import Vue from 'vue'
 
 export default Vue.extend({
   name: 'Feedback',
-  components: {InputTextarea, Button, InputCheck},
   data() {
     return {
       formData: {
@@ -138,14 +128,13 @@ export default Vue.extend({
 //  background-color: grey;
 //}
 
-.error-agree {
-  margin-top: 32px;
-}
+.checkbox-wrap {
+  position: relative;
+  margin-bottom: 3rem;
 
-.wrap-agree {
-  position: absolute;
-  left: 0;
-  top: 5px;
+  & > span {
+    position: absolute;
+  }
 }
 
 .grey-background {
@@ -166,6 +155,7 @@ export default Vue.extend({
     span {
       display: block;
       color: #FF4749;
+      font-size: 14px;
     }
   }
 
@@ -181,21 +171,18 @@ export default Vue.extend({
 }
 
 .feedback__field {
-  margin-bottom: 2rem;
   text-align: left;
   position: relative;
-
-  & input {
-    background: #f7f7f7;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 16px;
-    padding: 6px 10px;
-  }
+  display: block;
+  margin-bottom: 2rem;
 
   & textarea {
     height: 115px;
     resize: none;
+  }
+
+  & span {
+    position: absolute;
   }
 }
 
@@ -203,47 +190,36 @@ export default Vue.extend({
   margin-bottom: 2rem;
   text-align: left;
   position: relative;
-
-  & input, textarea {
-    background: #f7f7f7;
-    width: 100%;
-    border-radius: 5px;
-    font-size: 16px;
-    padding: 6px 10px;
-  }
-
-  & textarea {
-    height: 115px;
-  }
 }
 
 .feedback__inputs {
-
+  margin-bottom: 0;
   @media (min-width: 565px) {
     display: flex;
     column-gap: 2rem;
-  }
-}
-
-.feedback__input-wrap {
-  margin-bottom: 2rem;
-
-  @media (min-width: 565px) {
-    margin-bottom: 0;
+    margin-bottom: 2rem;
   }
 }
 
 .feedback__input {
+  margin-bottom: 2rem;
   min-width: 250px;
-  flex-grow: 1;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+
+  span {
+    position: absolute;
+  }
+
+  @media (min-width: 565px) {
+    margin-bottom: 0;
+    width: 50%;
+  }
 }
 
 .feedback__btn {
   height: 50px;
-}
-
-.agree__label {
-
 }
 
 </style>

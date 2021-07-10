@@ -5,14 +5,36 @@
         <div
           class="menu__item"
           v-for="m in menu"
+          v-if="$store.getters['isMobile']"
         >
           <div class="menu__title" @click="m.visible=!m.visible">
             <p>{{ m.name }}</p>
-            <button class="menu__show-btn" type="button">
+            <button
+              class="menu__show-btn"
+              type="button">
               <fa :icon="['fas', 'chevron-down']" class="icon"/>
             </button>
           </div>
           <div v-show="m.visible">
+            <nuxt-link
+              v-for="(item, index) in m.items"
+              :key="index"
+              :to="item.link"
+              class="menu__link"
+              v-text="item.title"
+            ></nuxt-link>
+          </div>
+        </div>
+
+        <div
+          class="menu__item"
+          v-for="m in menu"
+          v-if="$store.getters['isDesktop']"
+        >
+          <div class="menu__title">
+            <p>{{ m.name }}</p>
+          </div>
+          <div>
             <nuxt-link
               v-for="(item, index) in m.items"
               :key="index"
@@ -70,6 +92,7 @@ export default {
       }
     }
   },
+  computed: {},
   methods: {},
   created() {
     this.date = new Intl.DateTimeFormat('ru-Ru', {'year': 'numeric'}).format(new Date())
@@ -140,19 +163,25 @@ export default {
 
   &__show-btn {
     background: none;
-
-    .icon {
-      //color: red;
-    }
   }
 }
 
 @media (min-width: 768px) {
   .menu {
-    &__link {
-      color: red;
+    &__title {
+      padding-left: 1rem;
+    }
+    &__item + &__item {
+      margin-top: 0;
+      margin-left: 6rem;
     }
   }
+  .footer__area-menu {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
-
 </style>

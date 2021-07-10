@@ -6,7 +6,7 @@
         :messages="messages"
       />
       <div class="new-arrival__head">
-        <h2 class="new-arrival__title">Новое поступление</h2>
+        <h2 class="section__title">Новое поступление</h2>
         <div class="new-arrival__arrows">
 <!--          TODO вот здесь в батанах стрелки не грузятся-->
 <!--          <img src="~/assets/icons/arrow-right.svg" alt="">-->

@@ -1,6 +1,6 @@
 <template>
   <section class="promotions">
-    <h2 class="promotions__title">Акции</h2>
+    <h2 class="section__title">Акции</h2>
     <div class="promotions__box">
       <article v-for="item in 4">
         <a href="#" class="promotions__img">
@@ -31,12 +31,6 @@ export default {
 
 .promotions {
   padding-bottom: 3rem;
-
-  &__title {
-    font-size: 3.2rem;
-    font-weight: bold;
-    margin-bottom: 3rem;
-  }
 
   &__box {
     display: flex;
