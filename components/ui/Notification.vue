@@ -1,105 +1,124 @@
 <template>
-    <div class="notification">
-        <transition-group
-            name="messages"
-            class="messages-list"
-            tag="div"
-        >
-            <div
-                class="notification__content"
-                v-for="message in messages"
-                :key="message.id"
-            >
-                <p class="content__text">{{ message.name }}</p>
-            </div>
-        </transition-group>
+  <div class="notification">
+    <transition-group
+      name="messages"
+      class="messages-list"
+      tag="div"
+    >
+      <div
+        class="notification__content"
+        :class="color"
+        v-for="message in messages"
+        :key="message.id"
+      >
+        <p class="content__text">{{ message.name }}</p>
+      </div>
+    </transition-group>
 
-    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'Notification',
-    props: {
-        messages: {
-            type: Array,
-            default: () => {
-                return []
-            }
-        }
+  name: 'Notification',
+  props: {
+    messages: {
+      type: Array,
+      default: () => {
+        return []
+      }
     },
-    methods: {
-        hideNotification() {
-            if (this.messages.length) {
-                setTimeout(() => {
-                    this.messages.splice(this.messages.length - 1, 1)
-                }, 3000)
-            }
-        }
-    },
-    watch: {
-        messages() {
-            this.hideNotification()
-        }
-    },
-    mounted() {
-        this.hideNotification()
+    color: {
+      type: String,
+      default: ''
     }
+  },
+  methods: {
+    hideNotification() {
+      if (this.messages.length) {
+        setTimeout(() => {
+          this.messages.splice(this.messages.length - 1, 1)
+        }, 3000)
+      }
+    }
+  },
+  watch: {
+    messages() {
+      this.hideNotification()
+    }
+  },
+  mounted() {
+    this.hideNotification()
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .notification {
-    position: fixed;
-    top: 175px;
-    right: 30px;
-    z-index: 100;
+  position: fixed;
+  top: 175px;
+  right: 30px;
+  z-index: 100;
 
-    &__content {
-        padding: 16px;
-        border-radius: 5px;
-        color: #FFFFFF;
-        background: #2ca02c;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        margin-bottom: 15px;
-    }
+  &__content {
+    padding: 16px;
+    border-radius: 5px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+  }
+  & .default {
+    background-color: #2c3e50;
+  }
+  & .success {
+    background-color: #4CAF50;
+  }
+  & .error {
+    background-color: #FF5252;
+  }
+  & .warning {
+    background-color: #FB8C00;
+  }
+  & .primary {
+    background-color: #2196F3;
+  }
+
 }
 
 .messages {
-    &-enter {
-        transform: translateX(120px);
-        opacity: 0;
-    }
+  &-enter {
+    transform: translateX(120px);
+    opacity: 0;
+  }
 
-    &-enter-active {
-        transition: all .6s ease;
-    }
+  &-enter-active {
+    transition: all .6s ease;
+  }
 
-    &-enter-to {
-        opacity: 1;
-    }
+  &-enter-to {
+    opacity: 1;
+  }
 
-    &-leave {
-        height: 50px;
-        opacity: 1;
-    }
+  &-leave {
+    height: 50px;
+    opacity: 1;
+  }
 
-    &-leave-active {
-        transition: all .6s ease;
-    }
+  &-leave-active {
+    transition: all .6s ease;
+  }
 
-    &-leave-to {
-        height: 0;
-        transform: translateX(120px);
-        opacity: 0;
-    }
+  &-leave-to {
+    height: 0;
+    transform: translateX(120px);
+    opacity: 0;
+  }
 
-    &-move {
-        transition: transform .6s ease;
-    }
+  &-move {
+    transition: transform .6s ease;
+  }
 }
 
 </style>

@@ -4,12 +4,11 @@
       <Notification
         v-if="messages.length"
         :messages="messages"
+        color="success"
       />
       <div class="new-arrival__head">
         <h2 class="section__title">Новое поступление</h2>
         <div class="new-arrival__arrows">
-<!--          TODO вот здесь в батанах стрелки не грузятся-->
-<!--          <img src="~/assets/icons/arrow-right.svg" alt="">-->
           <button @click="prevSlide" class="btn-prev" :class="{disabled: isDisabled}"
                   :style="{background: `url(${require('~/assets/icons/arrow-left.svg')}) 0 0 / 100% no-repeat`}">🠐
           </button>

@@ -86,7 +86,8 @@
         </div>
 
         <div class="feedback__submit">
-          <button type="submit" class="feedback__btn button" tect="Submit">
+          <button type="submit" class="feedback__btn button" >
+<!--            tect="Submit"-->
             Отправить
           </button>
         </div>
@@ -99,7 +100,6 @@
 <script>
 
 import Vue from 'vue'
-
 export default Vue.extend({
   name: 'Feedback',
   data() {

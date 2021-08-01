@@ -2,6 +2,7 @@
   <div>
     <Notification
       :messages="messageAddProduct"
+      color="success"
     />
 
     <div class="catalog">
@@ -87,7 +88,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../assets/styles/variables";
+@import "/assets/styles/variables";
 
 .catalog {
   display: flex;
@@ -142,7 +143,7 @@ export default {
     }
   }
 
-  .page + .page {
+  li + li {
     margin-left: 5px;
   }
 }

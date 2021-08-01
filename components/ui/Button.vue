@@ -40,22 +40,28 @@ export default {
 <style lang="scss">
 
 .button {
+  width: fit-content;
+  position: relative;
+  place-content: center;
+  place-items: center;
   min-width: 150px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   max-width: 100%;
   font-size: 2rem;
-  line-height: 1;
+  line-height: 2rem;
   color: #ffffff;
   border-radius: 5px;
   white-space: nowrap;
   background: $colorBtn;
   outline: none;
-  transition: all .3s;
 
   &:hover {
-    background: lighten($colorBtn, .9);
+    background: linear-gradient(180deg, #CE2424 45.31%, #BB1717 100%);
+  }
+  &:active {
+    background: linear-gradient(180deg, #BB1717 100%, #CE2424 45.31%);
   }
 }
 

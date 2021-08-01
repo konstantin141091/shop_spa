@@ -39,7 +39,7 @@
           </nav>
           <p class="header__work-time">Доставка с 9:00 до 22:00</p>
           <div class="header__phone">
-            <a class="header__phone-value" href="tel:+78008008080">+7(3519)46-66-11</a>
+            <a class="header__phone-value" href="tel:+73519466611">+7(3519)46-66-11</a>
           </div>
         </div>
       </div>
